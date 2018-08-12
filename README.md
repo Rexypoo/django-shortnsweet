@@ -86,7 +86,12 @@ cd myshortener
 ```
 6. __OPTIONAL__: Configure your [database engine][Django engines]. This is beyond the scope of this readme. By default you can leave it alone and django will automatically create a local sqlite database file.
 
-7. Create an admin to manage the app
+7. Initialize the database so that we can create an administrator
+```shell
+python3 manage.py migrate
+```
+
+8. Create an admin to manage the app
 ```shell
 python3 manage.py createsuperuser
 ```
@@ -94,13 +99,13 @@ _If your server will be accessible from the internet use a strong password._
 
 ###### Include the shortnsweet app
 
-8. Clone shortnsweet into your project
+9. Clone shortnsweet into your project
 ```shell
 git clone https://github.com/Rexypoo/shortnsweet
 ```
 _Reminder: django uses the path within the code. The app __must__ be in a directory named shortnsweet_
 
-9. Enable the app in your project settings file `myshortener/settings.py`
+10. Enable the app in your project settings file `myshortener/settings.py`
 ```python
 ...
 INSTALLED_APPS = [
@@ -110,7 +115,7 @@ INSTALLED_APPS = [
 ...
 ```
 
-10. Create a path for short urls in the project URLs file `myshortener/urls.py`
+11. Create a path for short urls in the project URLs file `myshortener/urls.py`
 ```python
 ...
 from django.urls import include
@@ -124,7 +129,7 @@ urlpatterns = [
 ```
 _You can set the path to '' for the shortest urls, but you could have trouble assigning multipurpose URLs like 'admin'_
 
-11. Add the data model to the project database. At the shell run
+12. Add the data model to the project database. At the shell run
 ```shell
 python3 manage.py makemigrations shortnsweet
 ...
@@ -132,24 +137,24 @@ python3 manage.py migrate
 ...
 ```
 
-12. Start the project server
+13. Start the project server
 ```shell
 python3 manage.py runserver
 ```
 
-13. Navigate to the admin page (http://localhost:8000/admin), and log in with your superuser credentials from step 7.
+14. Navigate to the admin page (http://localhost:8000/admin), and log in with your superuser credentials from step 7.
 
-14. Select the 'add' option on the line for 'Short urls'. Add any URL and short name of your choice.
+15. Select the 'add' option on the line for 'Short urls'. Add any URL and short name of your choice.
 
 Congratulations! The project should perform redirects based on the entries in the 'Short urls' database and the location set by `myshortener/urls.py` (the location set in step 10 is http://localhost:8000/t/).
 
 ###### Optionally test the redirector
 
-15. From the [django admin interface][localhost django admin site], add a Short url as follows:
+16. From the [django admin interface][localhost django admin site], add a Short url as follows:
 * Url: https://github.com/Rexypoo/shortnsweet
 * Alias: shortnsweet_project
 
-16. Visit the url for this redirect at http://localhost:8000/t/shortnsweet_project
+17. Visit the url for this redirect at http://localhost:8000/t/shortnsweet_project
 
 You should be redirected to the github page for this app.
 
